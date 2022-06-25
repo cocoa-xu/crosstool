@@ -26,8 +26,8 @@ cc_toolchain_suite(
     toolchains = {
       "aarch64"             : ":cc-compiler-aarch64",
       "aarch64|gcc"         : ":cc-compiler-aarch64",
-      "aarch64-musl"        : ":cc-compiler-aarch64-musl",
-      "aarch64-musl|gcc"    : ":cc-compiler-aarch64-musl",
+      "aarch64_musl"        : ":cc-compiler-aarch64_musl",
+      "aarch64_musl|gcc"    : ":cc-compiler-aarch64_musl",
       "armv7a"              : ":cc-compiler-armv7a",
       "armv7a|gcc"          : ":cc-compiler-armv7a",
       "armv6"               : ":cc-compiler-armv6",
@@ -36,8 +36,8 @@ cc_toolchain_suite(
       "k8|gcc"              : ":cc-compiler-k8",
       "riscv64"             : ":cc-compiler-riscv64",
       "riscv64|gcc"         : ":cc-compiler-riscv64",
-      "riscv64-musl"        : ":cc-compiler-riscv64-musl",
-      "riscv64-musl|gcc"    : ":cc-compiler-riscv64-musl",
+      "riscv64_musl"        : ":cc-compiler-riscv64_musl",
+      "riscv64_musl|gcc"    : ":cc-compiler-riscv64_musl",
       "s390x"               : ":cc-compiler-s390x",
       "s390x|gcc"           : ":cc-compiler-s390x",
       "ppc64el"             : ":cc-compiler-ppc64el",
@@ -64,7 +64,7 @@ cc_toolchain(
 cc_toolchain_config(name = "aarch64-config", cpu = "aarch64")
 
 cc_toolchain(
-    name = "cc-compiler-aarch64-musl",
+    name = "cc-compiler-aarch64_musl",
     toolchain_config = ":aarch64-config-musl",
 
     all_files = ":empty",
@@ -75,7 +75,21 @@ cc_toolchain(
     strip_files = ":empty",
 )
 
-cc_toolchain_config(name = "aarch64-config-musl", cpu = "aarch64-musl")
+cc_toolchain_config(name = "aarch64-config-musl", cpu = "aarch64_musl")
+
+toolchain(
+    name = "cc-toolchain-aarch64_musl",
+    exec_compatible_with = [
+        "@platforms//cpu:aarch64_musl",
+        "@platforms//os:linux",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:aarch64_musl",
+        "@platforms//os:linux",
+    ],
+    toolchain = ":cc-compiler-aarch64_musl",
+    toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
+)
 
 cc_toolchain(
     name = "cc-compiler-armv7a",
@@ -149,7 +163,7 @@ cc_toolchain(
 cc_toolchain_config(name = "riscv64-config", cpu = "riscv64")
 
 cc_toolchain(
-    name = "cc-compiler-riscv64-musl",
+    name = "cc-compiler-riscv64_musl",
     toolchain_config = ":riscv64-config-musl",
 
     all_files = ":empty",
@@ -160,7 +174,7 @@ cc_toolchain(
     strip_files = ":empty",
 )
 
-cc_toolchain_config(name = "riscv64-config-musl", cpu = "riscv64-musl")
+cc_toolchain_config(name = "riscv64-config-musl", cpu = "riscv64_musl")
 
 toolchain(
     name = "cc-toolchain-riscv64",
@@ -177,16 +191,16 @@ toolchain(
 )
 
 toolchain(
-    name = "cc-toolchain-riscv64-musl",
+    name = "cc-toolchain-riscv64_musl",
     exec_compatible_with = [
-        "@platforms//cpu:riscv64",
+        "@platforms//cpu:riscv64_musl",
         "@platforms//os:linux",
     ],
     target_compatible_with = [
-        "@platforms//cpu:riscv64",
+        "@platforms//cpu:riscv64_musl",
         "@platforms//os:linux",
     ],
-    toolchain = ":cc-compiler-riscv64-musl",
+    toolchain = ":cc-compiler-riscv64_musl",
     toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
 )
 
