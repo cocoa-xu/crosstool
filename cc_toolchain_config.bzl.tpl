@@ -106,7 +106,7 @@ CXX_BUILTIN_INCLUDE_DIRECTORIES = {
         "/usr/include/aarch64-linux-gnu",
         "/usr/include",
     ],
-    "aarch64-musl": [
+    "aarch64_musl": [
         "/usr/aarch64-linux-musl/include/c++/11.2.0",
         "/usr/aarch64-linux-musl/include/c++/11.2.0/aarch64-linux-gnu",
         "/usr/aarch64-linux-musl/include/c++/11.2.0/backward",
@@ -124,7 +124,7 @@ CXX_BUILTIN_INCLUDE_DIRECTORIES = {
         "/usr/include/riscv64-linux-gnu",
         "/usr/include",
     ],
-    "riscv64-musl": [
+    "riscv64_musl": [
         "/usr/riscv64-linux-musl/include/c++/11.2.0",
         "/usr/riscv64-linux-musl/include/c++/11.2.0/riscv64-linux-gnu",
         "/usr/riscv64-linux-musl/include/c++/11.2.0/backward",
@@ -161,9 +161,9 @@ TOOL_PATH_PREFIX = {
     "armv7a":       "/usr/bin/arm-linux-gnueabihf-",
     "armv6":        "%{bcm2708_toolchain_root}%/arm-linux-gnueabihf/bin/arm-linux-gnueabihf-",
     "aarch64":      "/usr/bin/aarch64-linux-gnu-",
-    "aarch64-musl": "/usr/bin/aarch64-linux-gnu-",
+    "aarch64_musl": "/usr/bin/aarch64-linux-musl-",
     "riscv64":      "/usr/bin/riscv64-linux-gnu-",
-    "riscv64-musl": "/usr/bin/riscv64-linux-gnu-",
+    "riscv64_musl": "/usr/bin/riscv64-linux-musl-",
     "s390x":        "/usr/bin/s390x-linux-gnu-",
     "ppc64el":      "/usr/bin/powerpc64le-linux-gnu-",
 }
@@ -174,9 +174,9 @@ TARGET_SYSTEM_NAME = {
     "armv7a":       "arm-linux-gnueabihf",
     "armv6":        "arm-linux-gnueabihf",
     "aarch64":      "aarch64-linux-gnu",
-    "aarch64-musl": "aarch64-linux-gnu",
+    "aarch64_musl": "aarch64-linux-musl",
     "riscv64":      "riscv64-linux-gnu",
-    "riscv64-musl": "riscv64-linux-gnu",
+    "riscv64_musl": "riscv64-linux-musl",
     "s390x":        "s390x-linux-gnu",
     "ppc64el":      "powerpc64le-linux-gnu",
 }
@@ -186,9 +186,9 @@ COMPILE_FLAGS = {
     "armv7a":       ["-march=armv7-a", "-mfpu=neon-vfpv4"],
     "armv6":        [],
     "aarch64":      ["-march=armv8-a"],
-    "aarch64-musl": ["-march=armv8-a"],
+    "aarch64_musl": ["-march=armv8-a"],
     "riscv64":      [],
-    "riscv64-musl": [],
+    "riscv64_musl": [],
     "s390x":        [],
     "ppc64el":      [],
 }
@@ -212,9 +212,9 @@ OPT_COMPILE_FLAGS = {
     "armv7a":  COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
     "armv6":   COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
     "aarch64": COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
-    "aarch64-musl": COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
+    "aarch64_musl": COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
     "riscv64": COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
-    "riscv64-musl": COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
+    "riscv64_musl": COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
     "s390x":   COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
     "ppc64el": COMMON_OPT_COMPILE_FLAGS + NON_K8_OPT_COMPILE_FLAGS,
 }
@@ -234,9 +234,9 @@ LINKER_FLAGS = {
     "armv7a":       [GOLD_LINKER_FLAG],
     "armv6":        [GOLD_LINKER_FLAG],
     "aarch64":      [GOLD_LINKER_FLAG],
-    "aarch64-musl": [],
+    "aarch64_musl": [],
     "riscv64":      [],
-    "riscv64-musl": [],
+    "riscv64_musl": [],
     "s390x":        [GOLD_LINKER_FLAG],
     "ppc64el":      [GOLD_LINKER_FLAG],
 }
@@ -435,7 +435,7 @@ def _impl(ctx):
 cc_toolchain_config = rule(
     implementation = _impl,
     attrs = {
-        "cpu": attr.string(mandatory = True, values = ["armv7a", "armv6", "aarch64", "aarch64-musl", "k8", "riscv64", "riscv64-musl", "s390x", "ppc64el"]),
+        "cpu": attr.string(mandatory = True, values = ["armv7a", "armv6", "aarch64", "aarch64_musl", "k8", "riscv64", "riscv64_musl", "s390x", "ppc64el"]),
     },
     provides = [CcToolchainConfigInfo],
 )
