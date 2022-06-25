@@ -182,13 +182,15 @@ TARGET_SYSTEM_NAME = {
 }
 
 COMPILE_FLAGS = {
-    "k8":      ["-msse4.2"],
-    "armv7a":  ["-march=armv7-a", "-mfpu=neon-vfpv4"],
-    "armv6":   [],
-    "aarch64": ["-march=armv8-a"],
-    "riscv64": [],
-    "s390x": [],
-    "ppc64el": [],
+    "k8":           ["-msse4.2"],
+    "armv7a":       ["-march=armv7-a", "-mfpu=neon-vfpv4"],
+    "armv6":        [],
+    "aarch64":      ["-march=armv8-a"],
+    "aarch64-musl": ["-march=armv8-a"],
+    "riscv64":      [],
+    "riscv64-musl": [],
+    "s390x":        [],
+    "ppc64el":      [],
 }
 
 COMMON_OPT_COMPILE_FLAGS = [
